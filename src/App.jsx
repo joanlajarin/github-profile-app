@@ -10,18 +10,20 @@ function App() {
   const [dataProfileSearchBar, setDataProfileSearchBar] = useState("")
 
   function getProfileData(user = "github") {
+    console.log("getProfileData API users")
     const url = `https://api.github.com/users/${user}`
     fetch(url)
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      changeDataProfile(data)
+      setDataProfile(data)
     })
     .catch(error => {
       console.log(error)
     })
   }
   function getProfileDataSearchBar(user) {
+    console.log("getProfileDataSearchBar API users")
     const url = `https://api.github.com/users/${user}`
     fetch(url)
     .then(response => response.json())
@@ -33,22 +35,20 @@ function App() {
       console.log(error)
     })
   }
-  const changeDataProfile = (data) => {
-    setDataProfile(data)
 
-  }
   useEffect(() => {
+    console.log("useEffect App.jsx")
     getProfileData()
   },[])
 
   const handleSearchProfile = (event) => {
-
+    console.log("handleSearchProfile App.jsx")
     const user = event.target.value.replaceAll(' ', '%20')
-
     getProfileDataSearchBar(user)
   } 
 
   const handleProfileGithub = () => {
+    console.log("handleProfileGithub App.jsx")
     setDataProfile(dataProfileSearchBar)
   }
 

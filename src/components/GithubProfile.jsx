@@ -8,6 +8,7 @@ export default function GithubProfile({dataProfile}) {
     const [showMoreRepos, setShowMoreRepos] = useState(false)
 
     const getRepositories = (user) => {
+        console.log("getRepositories GitHubProfile.jsx")
         const url = `https://api.github.com/users/${user}/repos`
         fetch(url)
             .then(response => response.json())
@@ -20,17 +21,19 @@ export default function GithubProfile({dataProfile}) {
                 })
     }
     useEffect(() => {
+        console.log("useEffect GitHubProfile.jsx")
         setShowMoreRepos(false)
         const user = dataProfile.login
         getRepositories(user)
     },[dataProfile])
 
     const handleShowMoreRepos = () => {
+        console.log("handleShowMoreRepos GitHubProfile.jsx")
         showMoreRepos ? setShowMoreRepos(false) : setShowMoreRepos(true)
     }
     return (
-        <main className='flex flex-col items-center h-full'>
-        <header className='relative w-[1000px]'>
+        <main className='flex flex-col items-center h-fit bg-[#20293A]'>
+        <header className='relative w-[1000px] px-90 '>
             <div className='flex gap-[20px] justify-center text-[16px] font-medium'>
               <div className='flex bg-[#111729] w-fit py-[16px] rounded-xl'>
                 <span className="text-[#364153] px-[20px] border-r border-[#364153]">Followers</span>
@@ -48,10 +51,10 @@ export default function GithubProfile({dataProfile}) {
             <img className=" absolute size-[120px] bottom-0 left-0" src={dataProfile.avatar_url}></img>
         </header>
 
-        <main className='w-[1000px] flex flex-col mt-[20px] h-fit'>
+        <main className='w-[1000px] flex flex-col mt-[20px] h-full bg-[#20293A]'>
             <h1 className='text-[#CDD5E0] text-[32px]'>{dataProfile.name}</h1>
             <h2 className='text-[#CDD5E0] text-[16px] mt-[8px]'>{dataProfile.bio}</h2>
-            <section className='mt-[34px] grid grid-cols-2 h-fit gap-y-[34px] gap-x-[32px]'>
+            <section className='mt-[34px] grid grid-cols-2 h-full gap-y-[34px] gap-x-[32px] bg-[#20293A]'>
                 {
                     repositories ? ( 
                         repositories.length > 4 ? (
