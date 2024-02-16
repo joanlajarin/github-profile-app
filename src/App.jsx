@@ -43,7 +43,8 @@ function App() {
 
   const handleSearchProfile = (event) => {
 
-    const user = event.target.value
+    const user = event.target.value.replaceAll(' ', '%20')
+
     getProfileDataSearchBar(user)
   } 
 

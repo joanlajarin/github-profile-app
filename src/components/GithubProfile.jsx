@@ -21,7 +21,8 @@ export default function GithubProfile({dataProfile}) {
     }
     useEffect(() => {
         setShowMoreRepos(false)
-        getRepositories(dataProfile.name)
+        const user = dataProfile.login
+        getRepositories(user)
     },[dataProfile])
 
     const handleShowMoreRepos = () => {
@@ -47,7 +48,7 @@ export default function GithubProfile({dataProfile}) {
             <img className=" absolute size-[120px] bottom-0 left-0" src={dataProfile.avatar_url}></img>
         </header>
 
-        <main className='w-[1000px] flex flex-col mt-[20px] h-full'>
+        <main className='w-[1000px] flex flex-col mt-[20px] h-fit'>
             <h1 className='text-[#CDD5E0] text-[32px]'>{dataProfile.name}</h1>
             <h2 className='text-[#CDD5E0] text-[16px] mt-[8px]'>{dataProfile.bio}</h2>
             <section className='mt-[34px] grid grid-cols-2 h-fit gap-y-[34px] gap-x-[32px]'>
@@ -55,18 +56,15 @@ export default function GithubProfile({dataProfile}) {
                     repositories ? ( 
                         repositories.length > 4 ? (
                             showMoreRepos ? (
-                                repositories.map( repository => { <RepositoryCard data={repository}/> })
+                                repositories.map( repository => ( <RepositoryCard keyRepo={repository.id}  data={repository} user={dataProfile.login}/> ))
                                 ) : (
-                                    repositories.slice(0,4).map( repository => { <RepositoryCard data={repository}/> })
+                                    repositories.slice(0,4).map( repository => ( <RepositoryCard keyRepo={repository.id} data={repository} user={dataProfile.login}/> ))
                                 )
                             ) 
-                            : (  repositories.map( repository => { <RepositoryCard data={repository}/> })
+                            : (  repositories.map( repository => ( <RepositoryCard keyRepo={repository.id}  data={repository} user={dataProfile.login}/> ))
                         ) 
                     ) :  (
-                    <>
-                        <RepositoryCard/>
-                        <RepositoryCard/>
-                    </>
+                            <p>Loading...</p>
                     )
                 }
             </section>
