@@ -4,7 +4,7 @@ import star from '../images/Star.svg'
 import chield from '../images/Chield_alt.svg' 
 
 
-export default function RepositoryCard({keyRepo, data, user}){
+export default function RepositoryCard({data, user}){
 
     const url =  `https://github.com/${user}/${data.name}`
     const [daysAgo, setDaysAgo] = useState("")
@@ -29,10 +29,10 @@ export default function RepositoryCard({keyRepo, data, user}){
         setDaysAgo(days)
     },[])
     return (
-        <a key={keyRepo} id={keyRepo} href={url} target="_blank">
-            <div className="flex flex-col p-[20px] rounded-xl bg-gradient-to-r from-[#111729] to-[#1D1B48]">
-                <span className="text-[#CDD5E0] text-[20px]">{data.name}</span>
-                <span className="text-[#CDD5E0] mt-[12px] text-[16px]">{data.description}</span>
+        <a href={url} target="_blank" className="">
+            <div className="flex flex-col p-[20px]  rounded-xl bg-gradient-to-r from-[#111729] to-[#1D1B48]">
+                <span className="text-[#CDD5E0] text-[20px] w-100">{data.name}</span>
+                <span className="text-[#CDD5E0] mt-[12px] text-[16px] w-100">{data.description}</span>
                 <div className="flex mt-[20px] align-center	">
                     {
                         data.license && data.license.key  === 'mit' && (
